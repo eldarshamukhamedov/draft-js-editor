@@ -7,12 +7,8 @@ export const ToolbarButton = styled.button<{ active?: boolean }>`
   padding: 0;
   width: 1.5rem;
   height: 1.5rem;
-  line-height: 1.5rem;
-  > i {
-    color: inherit;
-    line-height: 1.5rem;
-    font-size: 1.2rem;
-  }
+  line-height: 1.2rem;
+  font-size: 1.2rem;
 
   &:hover {
     color: #efefef;
