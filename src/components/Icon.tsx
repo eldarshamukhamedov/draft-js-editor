@@ -1,8 +1,9 @@
-import React from "react";
+import styled from "styled-components";
 
-interface IconProps {
-  children: string;
-}
-export const Icon = ({ children }: IconProps) => (
-  <i className="material-icons">{children}</i>
-);
+export const Icon = styled.i.attrs(props => ({
+  className: `${props.className} material-icons`
+}))`
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+`;
