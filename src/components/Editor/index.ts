@@ -1,3 +1,4 @@
 export { Editor } from "./Editor";
-export { EditorGlobalStyle } from "./GlobalStyle";
-export { EditorWrapper } from "./Wrapper";
+export { GlobalStyle } from "./GlobalStyle";
+export { Wrapper } from "./Wrapper";
+export { useStore, Context, Provider } from "./Store";

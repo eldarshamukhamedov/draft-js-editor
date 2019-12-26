@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const EditorWrapper = styled.div`
+export const Wrapper = styled.div`
   background: #000;
   display: flex;
   flex-direction: column;
