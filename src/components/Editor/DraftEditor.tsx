@@ -1,14 +1,15 @@
 import React, { useEffect, useRef } from "react";
 import Draft from "draft-js";
-import { keyBindingFn } from "../../helpers/keyBindingFn";
-import { keyCommandReducer } from "../../helpers/keyCommandReducer";
-import { useStore, replaceDraftState } from "../../contexts/Store";
+import {
+  useStore,
+  commandReducer,
+  mapKeyToCommand,
+} from "../../contexts/Store";
+import { inlineKeyBindiings } from "../../options/inlineKeyBindings";
+import { getInlineStyleMap } from "../../helpers";
 
 export const DraftEditor = () => {
-  const {
-    state: { draftState },
-    dispatch,
-  } = useStore();
+  const { state, setState } = useStore();
   const editorRef = useRef<Draft.Editor>(null);
 
   useEffect(() => {
@@ -17,15 +18,15 @@ export const DraftEditor = () => {
 
   return (
     <Draft.Editor
-      customStyleMap={{ STRIKETHROUGH: { textDecoration: "line-through" } }}
-      editorState={draftState}
+      customStyleMap={getInlineStyleMap(inlineKeyBindiings)}
+      editorState={state}
       ref={editorRef}
-      onChange={nextState => dispatch(replaceDraftState(nextState))}
-      keyBindingFn={keyBindingFn}
+      onChange={setState}
+      keyBindingFn={mapKeyToCommand}
       handleKeyCommand={command => {
-        const nextState = keyCommandReducer(draftState, command);
+        const nextState = commandReducer(state, command);
         if (nextState) {
-          dispatch(replaceDraftState(nextState));
+          setState(nextState);
           console.debug("HANDLED", command);
           return "handled";
         }

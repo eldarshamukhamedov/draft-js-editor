@@ -9,18 +9,7 @@ export interface KeyOption {
   shift: boolean;
 }
 
-export enum InlineStyles {
-  Bold = "BOLD",
-  Code = "CODE",
-  Italic = "ITALIC",
-  Underline = "UNDERLINE",
-  StrikeThrough = "STRIKETHROUGH",
-}
-
-export interface InlineOption {
-  style: InlineStyles;
-  label: string;
-  icon: string;
+export interface KeyBinding {
   keySelector: Partial<KeyOption>;
   editorCommand: EditorCommand;
 }

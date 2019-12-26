@@ -1,7 +1,7 @@
 import { getDefaultKeyBinding, KeyBindingUtil } from "draft-js";
 import { matches } from "lodash";
-import { EditorCommand, KeyOption } from "../types";
-import { inlineOptions } from "../options/inlineOptions";
+import { EditorCommand, KeyOption } from "../../types";
+import { inlineKeyBindiings } from "../../options/inlineKeyBindings";
 
 const getKeyOption = (e: React.KeyboardEvent): KeyOption => ({
   key: e.key,
@@ -15,9 +15,9 @@ const filterKey = (key: KeyOption, selector: Partial<KeyOption>) =>
 
 // Maps keyboard events to editor commands
 // Ex. Cmd + Shift + X -> 'strikethrough'
-export const keyBindingFn = (e: React.KeyboardEvent): EditorCommand => {
+export const mapKeyToCommand = (e: React.KeyboardEvent): EditorCommand => {
   console.debug("[key]", e.key, e.keyCode);
-  const inlineCommand = inlineOptions
+  const inlineCommand = inlineKeyBindiings
     .filter(inline => filterKey(getKeyOption(e), inline.keySelector))
     .map(inline => inline.editorCommand)
     .pop();

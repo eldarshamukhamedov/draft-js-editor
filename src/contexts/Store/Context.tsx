@@ -1,19 +1,16 @@
-import React, { Dispatch, useContext, useReducer } from "react";
-import {
-  EditorActions,
-  EditorState,
-  defaultEditorState,
-  reducer,
-} from "./reducer";
+import React, { useContext, useState } from "react";
+import Draft from "draft-js";
+
+export const defaultEditorState = Draft.EditorState.createEmpty();
 
 // Context
-export interface Context<A> {
-  state: EditorState;
-  dispatch: Dispatch<A>;
+export interface Context {
+  state: Draft.EditorState;
+  setState(nextState: Draft.EditorState): void;
 }
-export const defaultContext: Context<EditorActions> = {
+export const defaultContext: Context = {
   state: defaultEditorState,
-  dispatch: () => undefined,
+  setState: () => undefined,
 };
 export const Context = React.createContext(defaultContext);
 export const useStore = () => useContext(Context);
@@ -21,11 +18,11 @@ export const useStore = () => useContext(Context);
 // Provider
 export interface ProviderProps {
   children?: React.ReactNode;
-  initialState: EditorState;
+  initialState: Draft.EditorState;
 }
 export const Provider = ({ children, initialState }: ProviderProps) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, setState] = useState(initialState);
   return (
-    <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>
+    <Context.Provider value={{ state, setState }}>{children}</Context.Provider>
   );
 };
