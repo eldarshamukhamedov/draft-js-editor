@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import Draft from "draft-js";
 import { keyBindingFn } from "../../helpers/keyBindingFn";
 import { keyCommandReducer } from "../../helpers/keyCommandReducer";
-import { useStore, replaceDraftState } from "./Store";
+import { useStore, replaceDraftState } from "../../contexts/Store";
 
 export const DraftEditor = () => {
   const {

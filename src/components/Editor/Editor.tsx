@@ -3,18 +3,22 @@ import Draft from "draft-js";
 import { GlobalStyle, Wrapper } from "./";
 import { DraftEditor } from "./DraftEditor";
 import { Toolbar } from "../Toolbar";
-import { Provider } from "./Store";
+import { Provider } from "../../contexts/Store";
 
-const INITIAL_STATE = {
-  draftState: Draft.EditorState.createWithContent(
-    Draft.ContentState.createFromText(
-      "All these things, and a thousand like them, came to pass in and close upon the dear old year one thousand seven hundred and seventy-five.",
-    ),
-  ),
+const HTML_STRING = `
+<h1>A Tale Of Two Cities.</h1>
+<p>All these things, and a thousand <strong>like</strong> them, came to pass.</p>
+`;
+
+const parseHtml = (html: string) => {
+  const { contentBlocks, entityMap } = Draft.convertFromHTML(html);
+  return Draft.EditorState.createWithContent(
+    Draft.ContentState.createFromBlockArray(contentBlocks, entityMap),
+  );
 };
 
 export const Editor = () => (
-  <Provider initialState={INITIAL_STATE}>
+  <Provider initialState={{ draftState: parseHtml(HTML_STRING) }}>
     <Wrapper>
       <GlobalStyle />
       <DraftEditor />
