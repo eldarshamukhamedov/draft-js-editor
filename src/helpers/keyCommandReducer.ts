@@ -1,16 +1,44 @@
-import { EditorState, RichUtils, Modifier } from "draft-js";
+import Draft from "draft-js";
+import { inlineOptions } from "../options/inlineOptions";
 
-export const keyCommandReducer = (state: EditorState, command: string) => {
+export const keyCommandReducer = (
+  state: Draft.EditorState,
+  command: string,
+) => {
   switch (command) {
-    case "strikethrough":
-      return RichUtils.toggleInlineStyle(state, "STRIKETHROUGH");
-    case "split-block": {
-      const content = state.getCurrentContent();
-      const selection = state.getSelection();
-      const nextContent = Modifier.splitBlock(content, selection);
-      return EditorState.push(state, nextContent, "split-block");
+    case "bold":
+    case "code":
+    case "italic":
+    case "underline":
+    case "strikethrough": {
+      const inlineOption = inlineOptions.find(
+        ({ editorCommand }) => editorCommand === command,
+      );
+
+      return inlineOption
+        ? Draft.RichUtils.toggleInlineStyle(state, inlineOption.style)
+        : null;
     }
+
+    case "split-block": {
+      const nextContent = Draft.Modifier.splitBlock(
+        state.getCurrentContent(),
+        state.getSelection(),
+      );
+      return Draft.EditorState.push(state, nextContent, "split-block");
+    }
+
+    case "backspace":
+    case "backspace-word": {
+      return Draft.RichUtils.onBackspace(state);
+    }
+
+    case "delete":
+    case "delete-word": {
+      return Draft.RichUtils.onDelete(state);
+    }
+
     default:
-      return RichUtils.handleKeyCommand(state, command);
+      return null;
   }
 };

@@ -3,7 +3,7 @@ import { Icon } from "../Icon";
 import { ToolbarButton } from "./ToolbarButton";
 import { Wrapper } from "./Wrapper";
 import { useStore, toggleInline } from "../../contexts/Store";
-import { INLINE_OPTIONS } from "../Editor/Inlines";
+import { inlineOptions } from "../../options/inlineOptions";
 
 export const Toolbar = () => {
   const {
@@ -13,7 +13,7 @@ export const Toolbar = () => {
 
   return (
     <Wrapper>
-      {INLINE_OPTIONS.map(({ label, style, icon }) => (
+      {inlineOptions.map(({ label, style, icon }) => (
         <ToolbarButton
           key={style}
           title={label}

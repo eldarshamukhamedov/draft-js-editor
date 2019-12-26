@@ -1,16 +1,4 @@
-import { matches } from "lodash";
-import { EditorCommand, InlineStyles, KeyOption } from "../../types";
-
-export interface InlineOption {
-  style: InlineStyles;
-  label: string;
-  icon: string;
-  keySelector: Partial<KeyOption>;
-  editorCommand: EditorCommand;
-}
-
-export const filterKey = (key: KeyOption, selector: Partial<KeyOption>) =>
-  matches(selector)(key);
+import { InlineStyles, InlineOption } from "../types";
 
 export const inlineOptions: InlineOption[] = [
   {
@@ -40,5 +28,31 @@ export const inlineOptions: InlineOption[] = [
     icon: "format_strikethrough",
     keySelector: { command: true, shift: true, keyCode: 88 }, // Cmd + Shift + X
     editorCommand: "strikethrough",
+  },
+  {
+    style: InlineStyles.Code,
+    label: "Code",
+    icon: "code",
+    keySelector: { command: true, keyCode: 192 }, // Cmd + `
+    editorCommand: "code",
+  },
+];
+
+export const keyOptions = [
+  {
+    keySelector: { key: "Backspace" },
+    editorCommand: "backspace",
+  },
+  {
+    keySelector: { command: true, key: "Backspace" },
+    editorCommand: "backspace-word",
+  },
+  {
+    keySelector: { key: "Delete" },
+    editorCommand: "delete",
+  },
+  {
+    keySelector: { command: true, key: "Delete" },
+    editorCommand: "delete-word",
   },
 ];
