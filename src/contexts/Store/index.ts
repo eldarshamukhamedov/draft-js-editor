@@ -1,2 +1,3 @@
 export { Context, useStore, Provider } from "./Context";
-export { toggleInline, replaceDraftState, keyCommand } from "./actions";
+export { commandReducer } from "./commandReducer";
+export { mapKeyToCommand } from "./mapKeyToCommand";

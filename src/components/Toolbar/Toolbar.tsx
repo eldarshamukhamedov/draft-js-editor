@@ -1,24 +1,22 @@
 import React from "react";
+import { RichUtils } from "draft-js";
 import { Icon } from "../Icon";
 import { ToolbarButton } from "./ToolbarButton";
 import { Wrapper } from "./Wrapper";
-import { useStore, toggleInline } from "../../contexts/Store";
-import { inlineOptions } from "../../options/inlineOptions";
+import { useStore } from "../../contexts/Store";
+import { inlineKeyBindiings } from "../../options/inlineKeyBindings";
 
 export const Toolbar = () => {
-  const {
-    state: { draftState },
-    dispatch,
-  } = useStore();
+  const { state, setState } = useStore();
 
   return (
     <Wrapper>
-      {inlineOptions.map(({ label, style, icon }) => (
+      {inlineKeyBindiings.map(({ label, style, icon }) => (
         <ToolbarButton
           key={style}
           title={label}
-          active={draftState.getCurrentInlineStyle().has(style)}
-          onClick={() => dispatch(toggleInline(style))}
+          active={state.getCurrentInlineStyle().has(style)}
+          onClick={() => setState(RichUtils.toggleInlineStyle(state, style))}
         >
           <Icon>{icon}</Icon>
         </ToolbarButton>

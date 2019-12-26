@@ -1,17 +1,14 @@
 import Draft from "draft-js";
-import { inlineOptions } from "../options/inlineOptions";
+import { inlineKeyBindiings } from "../../options/inlineKeyBindings";
 
-export const keyCommandReducer = (
-  state: Draft.EditorState,
-  command: string,
-) => {
+export const commandReducer = (state: Draft.EditorState, command: string) => {
   switch (command) {
     case "bold":
     case "code":
     case "italic":
     case "underline":
     case "strikethrough": {
-      const inlineOption = inlineOptions.find(
+      const inlineOption = inlineKeyBindiings.find(
         ({ editorCommand }) => editorCommand === command,
       );
 
