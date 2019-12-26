@@ -1,54 +1,28 @@
 import React from "react";
-import styled from "styled-components";
-import { EditorState as DraftEditorState, RichUtils } from "draft-js";
 import { Icon } from "../Icon";
 import { ToolbarButton } from "./ToolbarButton";
+import { Wrapper } from "./Wrapper";
+import { useStore, toggleInline } from "../../contexts/Store";
+import { INLINE_OPTIONS } from "../Editor/Inlines";
 
-const ToolbarWrapper = styled.div`
-  box-sizing: border-box;
-  display: inline-flex;
-
-  ${ToolbarButton} {
-    margin: 0.15rem;
-  }
-`;
-
-interface ToolbarProps {
-  editorState: DraftEditorState;
-  onChange(nextEditorState: DraftEditorState): void;
-}
-export const Toolbar = ({ editorState, onChange }: ToolbarProps) => {
-  const toggleInline = (inlineStyle: string) => () =>
-    onChange(RichUtils.toggleInlineStyle(editorState, inlineStyle));
-
-  const inlineStyle = editorState.getCurrentInlineStyle();
+export const Toolbar = () => {
+  const {
+    state: { draftState },
+    dispatch,
+  } = useStore();
 
   return (
-    <ToolbarWrapper>
-      <ToolbarButton
-        active={inlineStyle.has("BOLD")}
-        onClick={toggleInline("BOLD")}
-      >
-        <Icon>format_bold</Icon>
-      </ToolbarButton>
-      <ToolbarButton
-        active={inlineStyle.has("ITALIC")}
-        onClick={toggleInline("ITALIC")}
-      >
-        <Icon>format_italic</Icon>
-      </ToolbarButton>
-      <ToolbarButton
-        active={inlineStyle.has("UNDERLINE")}
-        onClick={toggleInline("UNDERLINE")}
-      >
-        <Icon>format_underline</Icon>
-      </ToolbarButton>
-      <ToolbarButton
-        active={inlineStyle.has("STRIKETHROUGH")}
-        onClick={toggleInline("STRIKETHROUGH")}
-      >
-        <Icon>format_strikethrough</Icon>
-      </ToolbarButton>
-    </ToolbarWrapper>
+    <Wrapper>
+      {INLINE_OPTIONS.map(({ label, style, icon }) => (
+        <ToolbarButton
+          key={style}
+          title={label}
+          active={draftState.getCurrentInlineStyle().has(style)}
+          onClick={() => dispatch(toggleInline(style))}
+        >
+          <Icon>{icon}</Icon>
+        </ToolbarButton>
+      ))}
+    </Wrapper>
   );
 };

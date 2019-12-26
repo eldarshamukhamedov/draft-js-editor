@@ -1,43 +1,28 @@
-import React, { useEffect, useState, useRef } from "react";
+import React from "react";
 import Draft from "draft-js";
-import { keyBindingFn } from "../../helpers/keyBindingFn";
-import { keyCommandReducer } from "../../helpers/keyCommandReducer";
-import { EditorGlobalStyle, EditorWrapper } from "./";
+import { GlobalStyle, Wrapper } from "./";
+import { DraftEditor } from "./DraftEditor";
 import { Toolbar } from "../Toolbar";
+import { Provider } from "../../contexts/Store";
 
-const INITIAL_STATE = Draft.EditorState.createWithContent(
-  Draft.ContentState.createFromText(
-    "All these things, and a thousand like them, came to pass in and close upon the dear old year one thousand seven hundred and seventy-five."
-  )
-);
+const HTML_STRING = `
+<h1>A Tale Of Two Cities.</h1>
+<p>All these things, and a thousand <strong>like</strong> them, came to pass.</p>
+`;
 
-export const Editor = () => {
-  const [editorState, setEditorState] = useState(INITIAL_STATE);
-
-  const editorRef = useRef<Draft.Editor>(null);
-  useEffect(() => {
-    if (editorRef.current) editorRef.current.focus();
-  }, []);
-
-  return (
-    <EditorWrapper>
-      <EditorGlobalStyle />
-      <Draft.Editor
-        customStyleMap={{ STRIKETHROUGH: { textDecoration: "line-through" } }}
-        editorState={editorState}
-        ref={editorRef}
-        onChange={setEditorState}
-        keyBindingFn={keyBindingFn}
-        handleKeyCommand={command => {
-          const nextState = keyCommandReducer(editorState, command);
-          if (nextState) {
-            setEditorState(nextState);
-            return "handled";
-          }
-          return "not-handled";
-        }}
-      />
-      <Toolbar editorState={editorState} onChange={setEditorState} />
-    </EditorWrapper>
+const parseHtml = (html: string) => {
+  const { contentBlocks, entityMap } = Draft.convertFromHTML(html);
+  return Draft.EditorState.createWithContent(
+    Draft.ContentState.createFromBlockArray(contentBlocks, entityMap),
   );
 };
+
+export const Editor = () => (
+  <Provider initialState={{ draftState: parseHtml(HTML_STRING) }}>
+    <Wrapper>
+      <GlobalStyle />
+      <DraftEditor />
+      <Toolbar />
+    </Wrapper>
+  </Provider>
+);

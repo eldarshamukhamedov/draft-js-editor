@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-export const EditorGlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
   .DraftEditor-root {
     box-sizing: border-box;
     padding: 0.5rem;

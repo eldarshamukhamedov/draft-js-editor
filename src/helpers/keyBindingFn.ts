@@ -1,11 +1,19 @@
 import { getDefaultKeyBinding, KeyBindingUtil } from "draft-js";
+import { EditorCommand, KeyOption } from "../types";
+import { inlineOptions, filterKey } from "../components/Editor/Inlines";
 
-const { hasCommandModifier } = KeyBindingUtil;
+const getKeyOption = (e: React.KeyboardEvent): KeyOption => ({
+  key: e.key,
+  keyCode: e.keyCode,
+  command: KeyBindingUtil.hasCommandModifier(e),
+  shift: e.shiftKey,
+});
 
-// Map key event -> key command. Override default key bindings here
-export const keyBindingFn = (e: React.KeyboardEvent) => {
-  if (e.key === "X" && hasCommandModifier(e)) {
-    return "strikethrough";
-  }
-  return getDefaultKeyBinding(e);
+export const keyBindingFn = (e: React.KeyboardEvent): EditorCommand => {
+  const inlineCommand = inlineOptions
+    .filter(inline => filterKey(getKeyOption(e), inline.keySelector))
+    .map(inline => inline.editorCommand)
+    .pop();
+
+  return inlineCommand || getDefaultKeyBinding(e);
 };
