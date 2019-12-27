@@ -12,6 +12,7 @@ export enum InlineStyles {
   Bold = "BOLD",
   Code = "CODE",
   Italic = "ITALIC",
+  Link = "LINK",
   Underline = "UNDERLINE",
   StrikeThrough = "STRIKETHROUGH",
 }
@@ -56,5 +57,13 @@ export const inlineKeyBindiings: InlineKeyBinding[] = [
     icon: "code",
     keySelector: { command: true, keyCode: 192 }, // Cmd + `
     editorCommand: "code",
+  },
+  {
+    style: InlineStyles.Link,
+    label: "Link",
+    css: { textDecoration: "underline", color: "lightblue" },
+    icon: "insert_link",
+    keySelector: { command: true, keyCode: 75 }, // Cmd + K
+    editorCommand: "link",
   },
 ];

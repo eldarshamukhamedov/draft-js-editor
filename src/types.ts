@@ -1,6 +1,6 @@
 import { DraftEditorCommand } from "draft-js";
 
-export type EditorCommand = DraftEditorCommand | null;
+export type EditorCommand = DraftEditorCommand | "link" | null;
 
 export interface KeyOption {
   key: string;
