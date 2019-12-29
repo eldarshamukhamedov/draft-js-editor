@@ -41,7 +41,7 @@ export const commandReducer = (state: Draft.EditorState, command: string) => {
       const selection = state.getSelection();
       const blocks = content.getBlocksAsArray();
 
-      console.debug("[LINK]", blocks.map(b => b.toJS()));
+      // console.debug("[LINK]", blocks.map(b => b.toJS()));
       console.debug("[SELECTION]", {
         anchorKey: selection.getAnchorKey(),
         anchorOffset: selection.getAnchorOffset(),
@@ -49,25 +49,28 @@ export const commandReducer = (state: Draft.EditorState, command: string) => {
         focusOffset: selection.getFocusOffset(),
       });
 
-      const umm = uniq([selection.getAnchorKey(), selection.getFocusKey()])
-        .map(content.getBlockForKey)
+      uniq([selection.getAnchorKey(), selection.getFocusKey()])
+        .map(key => content.getBlockForKey(key))
         .map(block => {
-          const ranges = [];
+          const ranges: [number, number][] = [];
           block.findEntityRanges(
             character => {
+              console.debug("[char]", character);
               const entityKey = character.getEntity();
               if (entityKey) {
-                console.debug("[ENTITY KEY]", entityKey);
+                // console.debug("[ENTITY KEY]", entityKey);
                 const entityType = content.getEntity(entityKey).getType();
                 return entityType === "LINK";
               }
-              console.debug("[NOPE]");
+              // console.debug("[NOPE]");
               return false;
             },
             (start, end) => {
               ranges.push([start, end]);
             },
           );
+          console.debug("[ranges]", ranges);
+          return ranges;
         });
 
       // const content = state

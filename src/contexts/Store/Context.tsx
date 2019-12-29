@@ -26,10 +26,7 @@ export const Provider = ({ children, initialState }: ProviderProps) => {
     state: state.toJS(),
     selection: state.getSelection().toJS(),
     content: state.getCurrentContent().toJS(),
-    blockMap: state
-      .getCurrentContent()
-      .getBlockMap()
-      .toJS(),
+    blocks: state.getCurrentContent().getBlocksAsArray(),
   });
   return (
     <Context.Provider value={{ state, setState }}>{children}</Context.Provider>
