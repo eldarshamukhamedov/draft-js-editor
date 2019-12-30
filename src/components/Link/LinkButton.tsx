@@ -18,7 +18,7 @@ export const LinkButton = () => {
         const linkUrl = window.prompt("Enter link URL");
         if (linkUrl) {
           const contentWithEntity = content.createEntity("LINK", "MUTABLE", {
-            href: new URL(linkUrl).href,
+            href: linkUrl,
             url: linkUrl,
           });
 

@@ -8,6 +8,7 @@ const Section = styled.div`
   font-family: monospace;
   margin: 0;
   overflow: auto;
+  scrollbar-color: #222 #111;
   padding: 1rem;
   white-space: break-spaces;
 `;
@@ -26,7 +27,7 @@ const Wrapper = styled.div`
   left: 0;
   margin: 0 auto;
 
-  background: #fff5;
+  background: #ffffff0f;
   box-sizing: border-box;
   font-size: 10px;
   height: 50vh;
