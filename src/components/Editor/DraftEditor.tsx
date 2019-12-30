@@ -1,10 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import Draft from "draft-js";
-import {
-  useStore,
-  commandReducer,
-  mapKeyToCommand,
-} from "../../contexts/Store";
+import { useStore, commandReducer, mapKeyToCommand } from "../Store";
 import { inlineKeyBindiings } from "../../options/inlineKeyBindings";
 import { getInlineStyleMap } from "../../helpers";
 

@@ -7,7 +7,6 @@ export const GlobalStyle = createGlobalStyle`
 
     div[contenteditable] {
       min-height: 6rem;
-      max-height: 10rem;
       overflow-y: auto;
     }
   }

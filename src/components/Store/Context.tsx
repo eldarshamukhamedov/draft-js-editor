@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import Draft from "draft-js";
 
 export const defaultEditorState = Draft.EditorState.createEmpty();
@@ -22,12 +22,16 @@ export interface ProviderProps {
 }
 export const Provider = ({ children, initialState }: ProviderProps) => {
   const [state, setState] = useState(initialState);
-  console.debug("[state]", {
-    state: state.toJS(),
-    selection: state.getSelection().toJS(),
-    content: state.getCurrentContent().toJS(),
-    blocks: state.getCurrentContent().getBlocksAsArray(),
-  });
+
+  useMemo(() => {
+    console.debug("[state]", {
+      state: state.toJS(),
+      selection: state.getSelection().toJS(),
+      content: state.getCurrentContent().toJS(),
+      blocks: state.getCurrentContent().getBlocksAsArray(),
+    });
+  }, [state]);
+
   return (
     <Context.Provider value={{ state, setState }}>{children}</Context.Provider>
   );

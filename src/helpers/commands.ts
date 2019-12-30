@@ -70,6 +70,7 @@ interface Link {
 
 # Skip over entities with cursor
 
+  **NOTE** This is probably handled by "immutable" entities
   on selection state change
     track previous and current character
       (_,p) -> (p,p) => noop
@@ -101,6 +102,18 @@ interface Link {
       (e,p) -> (_,e) => skip to start of entity range
 
 
+# @mention lookup by typing text
+
+  detect "@" character
+  listen for search term input
+    mark startOffset
+    mark endOffset
+
+  stop listening on
+    !selection.isCollapsed
+    selection.startOffset < startOffset
+    selection.endOffset > endOffset + 1
+    
 
 
 

@@ -20,41 +20,41 @@ export const inlineKeyBindiings: InlineKeyBinding[] = [
   {
     style: InlineStyles.Bold,
     css: { fontWeight: "bold" },
-    label: "Bold",
+    label: "Bold (Cmd + b)",
     icon: "format_bold",
-    keySelector: { command: true, keyCode: 66 }, // Cmd + B
+    keySelector: { command: true, keyCode: 66 },
     editorCommand: "bold",
   },
   {
     style: InlineStyles.Italic,
     css: { fontStyle: "italic" },
-    label: "Italic",
+    label: "Italic (Cmd + i)",
     icon: "format_italic",
-    keySelector: { command: true, keyCode: 73 }, // Cmd + I
+    keySelector: { command: true, keyCode: 73 },
     editorCommand: "italic",
   },
   {
     style: InlineStyles.Underline,
     css: { textDecoration: "underline" },
-    label: "Underline",
+    label: "Underline (Cmd + u)",
     icon: "format_underline",
-    keySelector: { command: true, keyCode: 85 }, // Cmd + U
+    keySelector: { command: true, keyCode: 85 },
     editorCommand: "underline",
   },
   {
     style: InlineStyles.StrikeThrough,
     css: { textDecoration: "line-through" },
-    label: "Strike-through",
+    label: "Strike-through (Cmd + Shift + x)",
     icon: "format_strikethrough",
-    keySelector: { command: true, shift: true, keyCode: 88 }, // Cmd + Shift + X
+    keySelector: { command: true, shift: true, keyCode: 88 },
     editorCommand: "strikethrough",
   },
   {
     style: InlineStyles.Code,
-    label: "Code",
+    label: "Code (Cmd + `)",
     css: { fontFamily: "monospace" },
     icon: "code",
-    keySelector: { command: true, keyCode: 192 }, // Cmd + `
+    keySelector: { command: true, keyCode: 192 },
     editorCommand: "code",
   },
 ];

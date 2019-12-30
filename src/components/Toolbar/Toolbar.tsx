@@ -1,9 +1,10 @@
 import React from "react";
-import { RichUtils } from "draft-js";
+import Draft from "draft-js";
 import { Icon } from "../Icon";
-import { ToolbarButton } from "./ToolbarButton";
+import { IconButton } from "../IconButton";
 import { Wrapper } from "./Wrapper";
-import { useStore } from "../../contexts/Store";
+import { useStore } from "../Store";
+import { LinkButton } from "../Link";
 import { inlineKeyBindiings } from "../../options/inlineKeyBindings";
 
 export const Toolbar = () => {
@@ -12,15 +13,18 @@ export const Toolbar = () => {
   return (
     <Wrapper>
       {inlineKeyBindiings.map(({ label, style, icon }) => (
-        <ToolbarButton
+        <IconButton
           key={style}
           title={label}
           active={state.getCurrentInlineStyle().has(style)}
-          onClick={() => setState(RichUtils.toggleInlineStyle(state, style))}
+          onClick={() =>
+            setState(Draft.RichUtils.toggleInlineStyle(state, style))
+          }
         >
           <Icon>{icon}</Icon>
-        </ToolbarButton>
+        </IconButton>
       ))}
+      <LinkButton />
     </Wrapper>
   );
 };
