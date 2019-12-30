@@ -22,7 +22,6 @@ export const Link = ({
     .getEntity(entityKey)
     .getData() as LinkEntityData;
 
-  console.debug("[Link] entityData", entityData);
   return (
     <StyledLink
       data-entity-key={entityKey}
