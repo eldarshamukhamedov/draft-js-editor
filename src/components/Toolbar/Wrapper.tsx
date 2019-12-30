@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { ToolbarButton } from "./ToolbarButton";
+import { IconButton } from "../IconButton";
 
 export const Wrapper = styled.div`
   box-sizing: border-box;
   display: inline-flex;
 
-  ${ToolbarButton} {
+  ${IconButton} {
     margin: 0.15rem;
   }
 `;

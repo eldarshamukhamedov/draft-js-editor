@@ -22,6 +22,7 @@ export interface ProviderProps {
 }
 export const Provider = ({ children, initialState }: ProviderProps) => {
   const [state, setState] = useState(initialState);
+
   return (
     <Context.Provider value={{ state, setState }}>{children}</Context.Provider>
   );
