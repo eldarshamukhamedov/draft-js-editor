@@ -20,7 +20,7 @@ export const inlineKeyBindiings: InlineKeyBinding[] = [
   {
     style: InlineStyles.Bold,
     css: { fontWeight: "bold" },
-    label: "Bold (Cmd + b)",
+    label: "Bold (Cmd + B)",
     icon: "format_bold",
     keySelector: { command: true, keyCode: 66 },
     editorCommand: "bold",
@@ -28,7 +28,7 @@ export const inlineKeyBindiings: InlineKeyBinding[] = [
   {
     style: InlineStyles.Italic,
     css: { fontStyle: "italic" },
-    label: "Italic (Cmd + i)",
+    label: "Italic (Cmd + I)",
     icon: "format_italic",
     keySelector: { command: true, keyCode: 73 },
     editorCommand: "italic",
@@ -36,7 +36,7 @@ export const inlineKeyBindiings: InlineKeyBinding[] = [
   {
     style: InlineStyles.Underline,
     css: { textDecoration: "underline" },
-    label: "Underline (Cmd + u)",
+    label: "Underline (Cmd + U)",
     icon: "format_underline",
     keySelector: { command: true, keyCode: 85 },
     editorCommand: "underline",
@@ -44,7 +44,7 @@ export const inlineKeyBindiings: InlineKeyBinding[] = [
   {
     style: InlineStyles.StrikeThrough,
     css: { textDecoration: "line-through" },
-    label: "Strike-through (Cmd + Shift + x)",
+    label: "Strike-through (Cmd + Shift + X)",
     icon: "format_strikethrough",
     keySelector: { command: true, shift: true, keyCode: 88 },
     editorCommand: "strikethrough",

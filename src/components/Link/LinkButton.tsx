@@ -12,7 +12,7 @@ export const LinkButton = () => {
   return (
     <IconButton
       key="LINK"
-      title="Link"
+      title="Create link"
       hidden={selection.isCollapsed()}
       onClick={() => {
         const linkUrl = window.prompt("Enter link URL");
